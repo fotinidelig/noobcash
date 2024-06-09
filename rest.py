@@ -36,7 +36,6 @@ def init_connection(total_nodes):
 	global TOTAL_NODES
 	global PORT
 	TOTAL_NODES = int(total_nodes)
-	# print("__________MR BLUE SKY PLEASE TELL US WHY YOU HAD TO HIDE AWAY FOR SO LONG__________")
 	print('App starting for ' + str(TOTAL_NODES) + ' nodes')
 	genesis_trans = myNode.create_genesis_transaction(TOTAL_NODES)
 	myNode.valid_chain.create_blockchain(genesis_trans) # also creates genesis block
@@ -63,8 +62,6 @@ def connect_node_request(myIP,port):
 	error = 'error' in data.keys()
 	if (not error) :
 		# print('____CONNECTED____')
-		# print('HEY YOU WITH THE PRETTY FACE')
-		# print('\t\t\tWELCOME TO THE HUMAN RACE')
 		potentialID = int(data.get('id'))
 		current_chain = data.get('chain')
 		current_utxos = data.get('utxos')
@@ -156,14 +153,12 @@ def receive_trans():
 	for unrec in myNode.unreceived_trans:
 		if(trans.id == unrec.id):
 			# print("_ALREADY CONFIRMED THIS TRANSACTION_")
-			# print("\t\tI GOT YOU BABE")
 			myNode.unreceived_trans = [t for t in myNode.unreceived_trans if t.id == unrec.id]
 			return # ignore received transaction
 
 	code = myNode.validate_transaction(myNode.wallet.utxos,trans)
 	
 	if (code == 'validated'):
-		# print('VIVA LA TRANSACTION VALIDA %s to %s!' %(data.get('senderID'), data.get('receiverID')))
 		isBlockMined = myNode.add_transaction_to_validated(trans)
 		# myNode.add_transaction_to_rollback(trans)
 
@@ -202,7 +197,6 @@ def receive_block():
 def get_blockchain():
 	message = {}
 	blocks = []
-	# print("__SENDING CHAIN CHAIN CHAIIIN:__")
 	for block in myNode.valid_chain.block_list:
 		tmp=copy.deepcopy(block.__dict__)
 		tmp['listOfTransactions']=block.listToSerialisable()
@@ -223,7 +217,6 @@ def transaction_new():
 	data = request.get_json()
 	amount = int(data.get('amount'))
 	id = int(data.get('id'))
-	# print('*** SHE IS LIKE A RAINBOW ***')
 	ip = myNode.ring[id].get('ip')
 	port = myNode.ring[id].get('port')
 	recipient_address = myNode.ring[id].get('public_key')

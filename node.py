@@ -77,7 +77,6 @@ class Node:
 		return
 
 	def broadcast_ring(self):
-		# print('*** AND I WILL SEND ALL MY LOVING TO YOUUUU ***')
 		print(self.ring)
 		url="connect/ring"
 		message=self.ring
@@ -327,7 +326,6 @@ class Node:
 	# [THREAD]
 	def mine_block(self, block, difficulty = MINING_DIFFICULTY):
 		guess = block.myHash()
-		# print("________KNOCK KNOCK KNOCKING ON HEAVEN'S DOOR________")
 		while guess[:difficulty]!=('0'*difficulty):
 			block.nonce += 1
 			guess = block.myHash()
@@ -394,7 +392,6 @@ class Node:
 
 	# validates and returns list of block objects
 	def validate_chain(self, blocklist):
-		# print("__________I CAN STILL HEAR YOU SAYING__________")
 		
 		chain = []
 		# initialize pending and unreceived transactions
@@ -448,7 +445,6 @@ class Node:
 				# print("___Rest of Chain invalid!")
 				return False,None,None
 
-			print("ok")
 			pending = tmp_pending
 			unreceived = tmp_unreceived
 
@@ -507,7 +503,6 @@ class Node:
 			self.valid_chain.block_list = new_blockchain
 			self.validate_pending()
 			# print("__Conflict resolved successfully!__")
-			# print("__________SO SALLY CAN WAIT__________")
 			self.valid_chain.print_chain()
 		except Exception as e:
 			print(f'consensus.{n_id}: {e.__class__.__name__}: {e}')
